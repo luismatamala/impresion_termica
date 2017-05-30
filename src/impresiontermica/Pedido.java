@@ -7,9 +7,6 @@ package impresiontermica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  *
@@ -24,24 +21,34 @@ public class Pedido extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        jButton1.addActionListener((ActionEvent e) -> {
-            Imprimir();
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                imprimir();
+            }
+        });
+        
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiar();
+            }
         });
     }
     
-    public void Imprimir()
+    public void imprimir()
     {
         String principal;
         String ensalada;
         String beber;
-        String pedido;
         
         principal = jTextField1.getText();
         ensalada = jTextField2.getText();
         beber = jTextField3.getText();
         
         Impresora p=new Impresora();
-
+        
+        p.setDispositivo("");
         p.escribir((char)27+"m");
         p.setTipoCaracterLatino();
         p.setFormato(24);
@@ -55,6 +62,13 @@ public class Pedido extends javax.swing.JFrame {
 
         p.cortar();
         p.cerrarDispositivo();
+    }
+    
+    public void limpiar()
+    {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }
 
     /**
@@ -74,6 +88,7 @@ public class Pedido extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pedidos");
@@ -99,6 +114,8 @@ public class Pedido extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Nuevo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,7 +125,8 @@ public class Pedido extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addComponent(jTextField2)
                     .addGroup(layout.createSequentialGroup()
@@ -139,7 +157,9 @@ public class Pedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -157,6 +177,7 @@ public class Pedido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
