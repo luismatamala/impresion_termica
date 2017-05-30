@@ -40,22 +40,21 @@ public class Pedido extends javax.swing.JFrame {
         ensalada = jTextField2.getText();
         beber = jTextField3.getText();
         
-        pedido = "hola mundo";
+        Impresora p=new Impresora();
+
+        p.escribir((char)27+"m");
+        p.setTipoCaracterLatino();
+        p.setFormato(24);
         
-        try {
-            char[] cutOff = new char[] { 29, 'V', 65, 0 };
-           
-            FileWriter fw = new FileWriter("/dev/ttyUSB0");
+        p.escribir(principal);
+        p.salto();
+        p.escribir(ensalada);
+        p.salto();
+        p.escribir(beber);
+        p.correr(10);
 
-            PrintWriter pw = new PrintWriter(fw);
-            
-            pw.print(pedido);
-            pw.write(cutOff);
-
-            pw.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        p.cortar();
+        p.cerrarDispositivo();
     }
 
     /**

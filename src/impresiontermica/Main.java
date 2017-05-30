@@ -13,8 +13,9 @@ public class Main
 {
     public static void main(String[] args) 
     {
-
-        Impresora p=new Impresora();
+        Pedido pedido = new Pedido();
+        pedido.setVisible(true);
+        /*Impresora p=new Impresora();
         p.setDispositivo("");
         p.escribir((char)27+"m");
         p.setTipoCaracterLatino();
@@ -29,6 +30,6 @@ public class Main
         p.escribir("esto es negro con formato");
         p.correr(10);
         p.cortar();
-        p.cerrarDispositivo();
+        p.cerrarDispositivo();*/
     }    
 }
